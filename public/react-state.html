@@ -1,0 +1,217 @@
+
+<html>
+<head>
+    <title>ReactJs - Props and State</title>
+    <link href="/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/libs/react/react.js"></script>
+    <script type="text/javascript" src="/libs/react/JSXTransformer.js"></script>
+    <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<style>
+    div.row{
+        margin:0px 5px 5px 5px;
+        border:1px dashed black;
+        padding:5px;
+    }
+    div.complete span.taskText{
+        text-decoration: line-through;
+    }
+    .taskText{
+        margin:10px;
+    }
+    .addTaskBtn{
+        margin-left:10px;
+    }
+    .footer{
+        border:1px solid black;
+        background-color: #f8f8ff;
+        padding:5px;
+    }
+    .completedItems{
+        margin-left:5px;
+    }
+</style>
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Angular React Tutorial</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/#/repeat">Ng-Repeat</a></li>
+                <li><a href="/#/trackBy">Ng-Repeat with Track-By</a></li>
+                <li><a href="hello-react.html">Hello React</a></li>
+                <li class="active"><a href="#">React Todo</a></li>
+                <li><a href="react.html">React Data Grid</a></li>
+                <li><a href="/#/ngReact">Ng-React</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+    <div class="jumbotron">
+        <H1>Reactive Todo</H1>
+        <div id="content"></div>
+    </div>
+</div>
+</body>
+<script type="text/jsx">
+        /** @jsx React.DOM */
+
+        var ToDos = {
+            todos: [],
+
+            addTodo: function(todo){
+                this.todos.push({task:todo, complete:false});
+            },
+
+            removeTodo: function(todo){
+                var removeIdx = this.todos.indexOf(todo);
+                if(removeIdx > -1){
+                    this.todos.splice(removeIdx, 1);
+                }
+            },
+
+            completeTodo: function(todo){
+                todo.complete = true;
+            },
+
+            totalCount: function(){
+                return this.todos.length;
+            },
+
+            completedCount: function(){
+                return this.todos.filter(function(itm){
+                    return itm.complete === true;
+                }).length;
+            }
+
+        };
+
+        var ToDo = React.createClass({
+            displayName: 'ToDo',
+
+            getInitialState: function(){
+                return ToDos
+            },
+            handleToDoSubmit: function(item){
+                ToDos.addTodo(item);
+                this.setState(ToDos);
+            },
+
+            handleToDoRemoval: function(item){
+                ToDos.removeTodo(item);
+                this.setState(ToDos);
+            },
+
+            handleComplete: function(item){
+                ToDos.completeTodo(item);
+                this.setState(ToDos);
+            },
+            render: function(){
+                return (
+                    <div className="todoContainer">
+                        <h2>Things to do for {this.props.userName}</h2>
+                        <ToDoInput onToDoSubmit={this.handleToDoSubmit}/>
+                        <ToDoList items={this.state.todos} onRemove={this.handleToDoRemoval} onComplete={this.handleComplete}/>
+                        <ToDoFooter todo={this.state}/>
+                    </div>
+                );
+            }
+        });
+
+        var ToDoFooter = React.createClass({
+            displayName: 'ToDoFooter',
+            render: function(){
+                return (
+                    <div className='footer'>
+                        <span><strong>Total todos:</strong> {this.props.todo.totalCount()}</span>
+                        <span className="completedItems"><strong>Completed todos:</strong> {this.props.todo.completedCount()}</span>
+                    </div>
+                )
+            }
+        });
+
+        var ToDoList = React.createClass({
+
+            displayName: 'ToDoList',
+
+            handleRemove: function(item){
+                this.props.onRemove(item);
+            },
+            handleComplete: function(item){
+                this.props.onComplete(item);
+            },
+            render: function() {
+                var component = this;
+                return (
+                    <div className="container-fluid">
+                        {this.props.items.map(function(item) {
+                           return <ToDoItem currentItem={item} onRemove={component.handleRemove} onComplete={component.handleComplete}/>;
+                        })}
+                    </div>
+                );
+            }
+        });
+
+        var ToDoItem = React.createClass({
+            displayName: 'ToDoItem',
+
+            removeItem: function(){
+                this.props.onRemove(this.props.currentItem);
+            },
+            completeItem: function(){
+                this.props.onComplete(this.props.currentItem);
+            },
+            render: function(){
+                var completeButton = (this.props.currentItem.complete ? "" : <img src='/img/check-3x.png' onClick={this.completeItem}/>);
+
+                return(
+                     <div className={this.props.currentItem.complete ? 'row complete' : 'row active'}>
+                        <span className='col-md-1'>{completeButton}</span>
+                        <span className='col-md-4 taskText lead'>{this.props.currentItem.task}</span>
+                        <span className='col-md-1'><img src='/img/circle-x-3x.png' onClick={this.removeItem}/></span>
+                    </div>
+                )
+            }
+        });
+
+        var ToDoInput = React.createClass({
+            displayName: 'ToDoInput',
+
+            handleSubmit: function(e){
+                e.preventDefault();
+                var toDoItem = this.refs.item.getDOMNode().value.trim();
+
+                if(!toDoItem){
+                    return;
+                }
+
+
+                this.props.onToDoSubmit(toDoItem);
+                this.refs.item.getDOMNode().value = '';
+                return;
+            },
+
+            render: function(){
+                return(
+
+                    <form className="todoForm form-inline" onSubmit={this.handleSubmit} role="form">
+                        <div class="form-group">
+                            <input type="text" ref="item" size="50" className="form-control" placeholder="Something important to do...."/>
+                            <input type="submit" value="Create" className="btn btn-primary btn-sm addTaskBtn"/>
+                        </div>
+                    </form>
+                );
+            }
+        });
+
+        React.renderComponent(
+            <ToDo userName="Bob"/>,
+            document.getElementById('content')
+        );
+
+    </script>
+</html>

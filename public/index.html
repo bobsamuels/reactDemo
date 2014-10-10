@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Anguar-Rest</title>
+    <link href="/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/libs/angular/angular.js"></script>
+    <script type="text/javascript" src="/libs/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="/libs/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/libs/react/react.js"></script>
+    <script type="text/javascript" src="/libs/react/JSXTransformer.js"></script>
+    <script type="text/javascript" src="/libs/underscore/underscore.js"></script>
+    <script type="text/javascript" src="/libs/ngReact/ngReact.js"></script>
+    <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="/directives/nav-bar.js"></script>
+    <script type="text/javascript" src="/pages/repeat.js"></script>
+    <script type="text/javascript" src="/pages/track-by.js"></script>
+    <script type="text/javascript" src="/pages/react.js"></script>
+    <script type="text/javascript" src="/pages/react-repeat.js"></script>
+    <script type="text/jsx" src="/directives/repeater.jsx"></script>
+</head>
+<body ng-app="angularReactApp">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Angular React Tutorial</a>
+            </div>
+            <nav-bar></nav-bar>
+        </div>
+    </div>
+    <div class="container" ng-view="">
+
+    </div>
+</body>
+
+</html>

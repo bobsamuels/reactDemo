@@ -1,0 +1,18 @@
+{
+    "name": "angularReact",
+    "version": "0.0.1",
+    "dependencies": {
+        "angular":          "1.2.16",
+        "angular-route":    "1.2.16",
+        "angular-sanitize": "1.2.16",
+        "angular-mocks":    "1.2.16",
+        "ngReact":          "0.0.2",
+        "jquery":           "1.8.3",
+        "react":            "0.11.2",
+        "bootstrap":        "3.2.0",
+        "underscore":       "~1.5.2"
+
+
+    },
+    "analytics": false
+}

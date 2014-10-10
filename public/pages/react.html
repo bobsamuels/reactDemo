@@ -1,0 +1,12 @@
+<div class="jumbotron">
+    <H1>NG-React</H1>
+    <HR/>
+    <div ng-if="loading">
+        <H3>Loading Data</H3>
+    </div>
+    <div ng-if="!loading">
+        <button class="btn-primary" ng-click="loadMore()" ng-if="!added" style="margin-bottom:10;">Add More Records</button>
+        <button class="btn-primary" ng-click="incrementAll()">Increment All</button>
+        <div ng-react-component="Repeater" data="rows"></div>
+    </div>
+</div>

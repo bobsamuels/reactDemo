@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>ReactJs</title>
+    <link href="/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/libs/react/react.js"></script>
+    <script type="text/javascript" src="/libs/react/JSXTransformer.js"></script>
+    <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Angular React Tutorial</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/#/repeat">Ng-Repeat</a></li>
+                <li><a href="/#/trackBy">Ng-Repeat with Track-By</a></li>
+                <li class="active"><a href="#">Hello React</a></li>
+                <li><a href="react-state.html">React Todo</a></li>
+                <li><a href="react.html">React Data Grid</a></li>
+                <li><a href="/#/ngReact">Ng-React</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+    <div class="jumbotron">
+        <H1>Hello Widen Component</H1>
+        <div id="contentDSL" style="border: 2px solid black;"></div>
+        <div id="contentJSX" style="border: 2px solid black;"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var HelloWidenDSL = React.createClass({displayName: 'HelloWidenDSL',
+        render: function() {
+            return (
+                    React.DOM.div({className: "helloWiden"},
+                            "Hello, Widen! I am a React DSL Component."
+                    )
+                    );
+        }
+    });
+    React.renderComponent(
+            HelloWidenDSL(null),
+            document.getElementById('contentDSL')
+    );
+</script>
+
+<script type="text/jsx">
+        /** @jsx React.DOM */
+
+        var HelloWidenJsx = React.createClass({displayName: 'HelloWidenJsx',
+            render: function() {
+                return (
+                        <div className="helloWiden">Hello, Widen! I am a Jsx component.</div>
+                );
+            }
+        });
+
+        React.renderComponent(
+        <HelloWidenJsx />,
+                document.getElementById('contentJSX')
+        );
+
+    </script>
+</html>

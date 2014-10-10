@@ -1,0 +1,37 @@
+<div class="jumbotron">
+    <H1>NG-Repeat</H1>
+    <HR/>
+    <div ng-if="loading">
+        <H3>Loading Data</H3>
+    </div>
+    <div ng-if="!loading">
+        <button class="btn-primary" ng-click="loadMore()" ng-if="!added" style="margin-bottom:10;">Add More Records</button>
+        <button class="btn-primary" ng-click="incrementAll()">Increment All</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Country</th>
+                    <th>Signup Date</th>
+                    <th>Updated Count</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in rows">
+                    <td ng-bind="row.id"></td>
+                    <td ng-bind="row.first_name"></td>
+                    <td ng-bind="row.last_name"></td>
+                    <td ng-bind="row.email"></td>
+                    <td ng-bind="row.country"></td>
+                    <td ng-bind="row.signup_date"></td>
+                    <td ng-bind="row.updated_count"></td>
+                    <td><button ng-click="updateCnt(row)">+</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

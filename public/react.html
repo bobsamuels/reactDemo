@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Anguar-Rest</title>
+    <link href="/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/libs/angular/angular.js"></script>
+    <script type="text/javascript" src="/libs/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="/libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/libs/react/react.js"></script>
+    <script type="text/javascript" src="/libs/react/JSXTransformer.js"></script>
+    <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/jsx" src="/react/data-table.js"></script>
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Angular React Tutorial</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/#/repeat">Ng-Repeat</a></li>
+                <li><a href="/#/trackBy">Ng-Repeat with Track-By</a></li>
+                <li><a href="hello-react.html">Hello React</a></li>
+                <li><a href="react-state.html">React Todo</a></li>
+                <li class="active"><a href="#">React Data Grid</a></li>
+                <li><a href="/#/ngReact">Ng-React</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+    <div class="jumbotron">
+        <H1>Native React</H1>
+        <HR/>
+        <div id="dataDisplay"></div>
+    </div>
+</div> <!-- /container -->
+</body>
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var mountNode = document.getElementById('dataDisplay');
+    React.renderComponent(<DataDisplay/>, mountNode);
+</script>
+</html>

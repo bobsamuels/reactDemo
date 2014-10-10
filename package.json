@@ -1,0 +1,12 @@
+{
+    "name": "angularReact",
+    "description": "AngularJs with React",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "4.x"
+    },
+    "scripts": {
+        "postinstall": "bower install"
+    }
+}
